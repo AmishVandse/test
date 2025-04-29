@@ -1,25 +1,50 @@
 import React from 'react';
-import logo from './logo.svg';
+import { BrowserRouter as Router, Route, Routes, NavLink, Navigate } from 'react-router-dom';
 import './App.css';
+
+// Import components
+import APIUsage from './components/APIUsage';
+import APIKeys from './components/APIKeys';
+import APIDocumentation from './components/APIDocumentation';
+import OCRAnalyzer from './components/OCRAnalyzer';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="app-container">
+        <aside className="sidebar">
+          <div className="logo-section">
+            <div className="logo">FinOptima</div>
+            <div className="solutions">Solutions</div>
+          </div>
+          <nav className="nav-menu">
+            <NavLink to="/api-usage" className={({ isActive }) => `nav-item ${isActive ? 'selected' : ''}`}>
+              <span className="nav-icon">{'<>'}</span>
+              <span>API Usage</span>
+            </NavLink>
+            <NavLink to="/api-keys" className={({ isActive }) => `nav-item ${isActive ? 'selected' : ''}`}>
+              <span className="nav-icon">🔑</span>
+              <span>API Keys</span>
+            </NavLink>
+            <NavLink to="/api-documentation" className={({ isActive }) => `nav-item ${isActive ? 'selected' : ''}`}>
+              <span className="nav-icon">📄</span>
+              <span>API Documentation</span>
+            </NavLink>
+            <NavLink to="/ocr-analyzer" className={({ isActive }) => `nav-item ${isActive ? 'selected' : ''}`}>
+              <span className="nav-icon">🔍</span>
+              <span>OCR Analyzer</span>
+            </NavLink>
+          </nav>
+        </aside>
+        <Routes>
+          <Route path="/api-usage" element={<APIUsage />} />
+          <Route path="/api-keys" element={<APIKeys />} />
+          <Route path="/api-documentation" element={<APIDocumentation />} />
+          <Route path="/ocr-analyzer" element={<OCRAnalyzer />} />
+          <Route path="/" element={<Navigate to="/api-keys" replace />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
