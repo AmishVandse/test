@@ -1,0 +1,19 @@
+{
+    "IndexDocument": {
+        "Suffix": "index.html"
+    },
+    "ErrorDocument": {
+        "Key": "index.html"
+    },
+    "RoutingRules": [
+        {
+            "Condition": {
+                "HttpErrorCodeReturnedEquals": "404"
+            },
+            "Redirect": {
+                "HostName": "YOUR_BUCKET_WEBSITE_ENDPOINT",
+                "ReplaceKeyPrefixWith": "#/"
+            }
+        }
+    ]
+} 
